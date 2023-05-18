@@ -21,15 +21,6 @@ def id_to_label(id):
     id_to_label_map = {0:"setosa", 1:"versicolor", 2:"virginica"}
     return id_to_label_map[id]
 
-def parse_zbus_response(z_bus_response):
-    tree = ET.ElementTree(ET.fromstring(z_bus_response))
-    root = tree.getroot()
-    # print(root.tag)
-    parsed_output = {}
-    for child in root:
-        parsed_output[child.tag] = child.text
-    return parsed_output
-
 def train_model(data_path, data_fname, model_path, model_fname):
     data = load_data(data_path=data_path, data_fname=data_fname)
     data["species"] = data["species"].apply(lambda x: label_to_id(x))
